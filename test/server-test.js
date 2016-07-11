@@ -104,8 +104,11 @@ describe('Server', () => {
 
       this.request.get('/pizzas/testPizza', (error, response) => {
         if (error) { done(error); }
-        assert(response.body.includes(pizza.toppings),
-               `"${response.body}" does not include "${pizza.toppings}".`);
+        pizza.toppings.forEach(function(topping){
+          assert(response.body.includes(topping),
+            `"${response.body}" does not include "${topping}".`);
+        })
+
         done();
       });
     });
