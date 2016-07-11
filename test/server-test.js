@@ -98,6 +98,17 @@ describe('Server', () => {
         done();
       });
     });
+
+    it('should return a page that has the toppings of the pizza', (done) => {
+      var pizza = app.locals.pizzas.testPizza;
+
+      this.request.get('/pizzas/testPizza', (error, response) => {
+        if (error) { done(error); }
+        assert(response.body.includes(pizza.toppings),
+               `"${response.body}" does not include "${pizza.toppings}".`);
+        done();
+      });
+    });
   });
 
 });
